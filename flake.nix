@@ -2,10 +2,12 @@
   description = "Extra packages by me@romatthe.dev";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  inputs.flake-utils.url = "github:numtide/flake-utils";
+  
+  outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachSystem ["x86_64-linux"] (system: {
 
-  outputs = { self, nixpkgs } @ inputs : {
-
-    packages.x86_64-linux.sway-borders =      
+    #    packages.x86_64-linux.sway-borders =
+    packages.sway-borders = 
       with import nixpkgs { system = "x86_64-linux"; };
 
       stdenv.mkDerivation {
@@ -63,5 +65,9 @@
         };
       };
     
-  };
+    overlay = final: prev: {
+      sway-borders = self.sway-borders;
+    };
+    
+  });
 }
