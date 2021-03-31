@@ -66,7 +66,7 @@
       };
     
     overlay = final: prev: {
-      sway-borders = self.sway-borders;
+      sway-borders = self.packages.x86_64-linux.sway-border;
     };
     
   });
