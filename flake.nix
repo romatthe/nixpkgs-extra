@@ -5,23 +5,7 @@
 
   outputs = { self, nixpkgs } @ inputs : {
 
-    # packages.x84_64-linux.sway-borders = inputs.nixpkgs.legacyPackages.${"x86_64-linux"}.callPackage ./pkg/sway-borders {};
-    #packages.x84_64-linux.sway-borders = (import ./pkg/sway-borders nixpkgs);
-
-    #defaultPackage.x84_64-linux = (import ./pkg/sway-borders nixpkgs);
-
-    #sway-borders = (import ./pkg/sway-borders nixpkgs);
-  
-    #overlay = final: prev:
-    #    let
-    #      extra = rec {
-    #        sway-borders = prev.callPackage ./pkg/sway-borders {};
-    #      };
-    #    in
-    #      extra // { inherit extra; };
-
-    defaultPackage.x86_64-linux =
-      
+    packages.x86_64-linux.sway-borders =      
       with import nixpkgs { system = "x86_64-linux"; };
 
       stdenv.mkDerivation {
@@ -78,5 +62,6 @@
           maintainers = with maintainers; [ primeos synthetica ma27 ];
         };
       };
+    
   };
 }
